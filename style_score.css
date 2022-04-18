@@ -1,0 +1,19 @@
+/* .score-tile{
+    box-shadow: 0 0 0 0;
+} */
+
+.score-tile > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: min(1.7vw, 25px);
+}
+
+#correct-score {
+    background-color: var(--correct-color);
+}
+
+#incorrect-score {
+    background-color: var(--incorrect-color);
+}

@@ -1,0 +1,21 @@
+/* @media only screen and (max-width: 1075px) {
+    html{font-size: 13px;}
+    .element-desc{font-size: 0.6vw;}
+}
+@media only screen and (max-width: 875px) {
+    html{font-size: 11px;}
+    .element-name, .element-name-input{margin: 10% auto 0 auto;}
+    .element-desc{margin: 10% auto 0 auto;}
+}
+@media only screen and (max-width: 700px) {
+    html{font-size: 9px;}
+    .element-name, .element-name-input{margin: 5% auto 0 auto;}
+}
+@media only screen and (max-width: 600px) {
+    html{font-size: 8px;}
+    .element-name, .element-name-input{margin: 5% auto 0 auto;}
+} */
+@media only screen and (max-width: 500px) {
+    main{display: none;}
+    .rotate-warning-message{display: block;}
+}

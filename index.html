@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content=""> -->
+    <link rel="icon" type="image/x-icon" href="src/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_header.css">
+    <link rel="stylesheet" href="style_animations.css">
+    <link rel="stylesheet" href="style_breakpoints.css">
+    <link rel="stylesheet" href="style_element.css">
+    <link rel="stylesheet" href="style_score.css">
+    <link rel="stylesheet" href="style_modal.css">
+    <title>Memorize the Periodic Table</title>
+    <meta name="description" content="Learn and memorize easely the Periodic Table with this easy and interactive gamified version!"">
+    <meta name="keywords" content="Periodic table, element, Elements, group, metals, learn, memorize, game, interactive">
+</head>
+<body>
+
+    <header>
+        <div class="title">PERIODIC TABLE OF ELEMENTS</div>
+        <div class="option-container" id="header-options-container">
+            <div class="option" onclick="change_state(TRAIN_STATE)"><div class="selected-option" id="train-option">Table</div></div>
+            <div class="option" onclick="change_state(TEST_GROUPS_STATE)"><div id="test-group-option">Groups</div></div>
+            <div class="option" onclick="change_state(TEST_ELEMENTS_STATE)"><div id="test-element-option">Elements</div></div>
+        </div>
+    </header>
+
+    <main>
+        
+        <dialog id="completed-modal">
+
+            <div id="title">COMPLETED!</div>
+            <div class="row">
+                <p class="modal-score-label">Correct: </p>
+                <div class="modal-score-tile" id="modal-score-correct-wrapper">
+                    <div class="modal-score" id="modal-score-correct">
+                        -1
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="modal-score-label">Incorrect: </p>
+                <div class="modal-score-tile" id="modal-score-incorrect-wrapper">
+                    <div class="modal-score" id="modal-score-incorrect">
+                        -1
+                    </div>
+                </div>
+            </div>
+            <input id="modal-button" class="button" type="button" onclick="close_modal()" value="Close">
+
+        </dialog>
+
+    <div class="grid">
+        <!-- <div class="score-container-wrapper">
+            <div class="score-container"></div>
+        </div> -->
+        <!-- Prima riga -->
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name">Hydrogen</div>
+            </div>
+        </div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">He</div>
+                <div class="element-number">2</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+
+        <!-- Seconda riga -->
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">Li</div>
+                <div class="element-number">3</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">Be</div>
+                <div class="element-number">4</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper score-tile" id="score-label"><div>Score</div></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper score-tile" id="correct-score"><div>0</div></div>
+        <div class="element-wrapper score-tile" id="incorrect-score"><div>0</div></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper score-tile" id="neutral-score"><div>118</div></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">B</div>
+                <div class="element-number">5</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">C</div>
+                <div class="element-number">6</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">N</div>
+                <div class="element-number">7</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">O</div>
+                <div class="element-number">8</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">F</div>
+                <div class="element-number">9</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">Ne</div>
+                <div class="element-number">10</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+
+        <!-- Terza riga -->
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">Na</div>
+                <div class="element-number">11</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">Mg</div>
+                <div class="element-number">12</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper hidden-tile"></div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">Al</div>
+                <div class="element-number">14</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">Si</div>
+                <div class="element-number">15</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">P</div>
+                <div class="element-number">16</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">S</div>
+                <div class="element-number">17</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">Cl</div>
+                <div class="element-number">18</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+
+        <!-- Quarta riga -->
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">Ar</div>
+                <div class="element-number">19</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">20</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">21</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">22</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">23</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">24</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">25</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">26</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">27</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">28</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">29</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">30</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+
+        <!-- Quinta riga -->
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+
+        <!-- Sesta riga -->
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <!-- Terre rare -->
+        <div class="lantanids-grid">
+            <div class="element-wrapper hidden-tile"></div>
+            <div class="element-wrapper hidden-tile"></div>
+            <div class="element-wrapper lantanids" >
+                <div class="label-landing">Lanthanides</div>
+                <div class="element">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper lantanids" >
+                <div class="element">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper lantanids" >
+                <div class="element">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper lantanids" >
+                <div class="element">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper lantanids" >
+                <div class="element">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper lantanids" >
+                <div class="element">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper lantanids" >
+                <div class="element">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper lantanids" >
+                <div class="element">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper lantanids" >
+                <div class="element">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper lantanids" >
+                <div class="element">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper lantanids" >
+                <div class="element">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper lantanids" >
+                <div class="element">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper lantanids">
+                <div class="element">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper lantanids">
+                <div class="element">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Fine terre rare -->
+        <div class="element-wrapper">
+            <div class="label-jump"></div>
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+
+        <!-- Settima riga -->
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element ">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <!-- Gruppo 5f -->
+        <div class="actinides-grid">
+            <div class="element-wrapper hidden-tile"></div>
+            <div class="element-wrapper hidden-tile"></div>
+            <div class="element-wrapper actinides">
+                <div class="label-landing">Actinides</div>
+                <div class="element ">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper actinides">
+                <div class="element ">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper actinides">
+                <div class="element ">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper actinides">
+                <div class="element ">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper actinides">
+                <div class="element ">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper actinides">
+                <div class="element ">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper actinides">
+                <div class="element ">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper actinides">
+                <div class="element ">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper actinides">
+                <div class="element ">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper actinides">
+                <div class="element ">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper actinides">
+                <div class="element ">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper actinides">
+                <div class="element ">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper actinides">
+                <div class="element ">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+            <div class="element-wrapper actinides">
+                <div class="element ">
+                    <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                    <div class="element-symbol">H</div>
+                    <div class="element-number">1</div>
+                    <div class="element-name"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Fine gruppo 5f -->
+        <div class="element-wrapper">
+            <div class="label-jump"></div>
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        <div class="element-wrapper">
+            <div class="element">
+                <input type="text" class="element-symbol-input hidden" placeholder="Symbol">
+                <div class="element-symbol">H</div>
+                <div class="element-number">1</div>
+                <div class="element-name"></div>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <div id="reset-button" class="button" onclick="button_function()">START</div>
+
+    </main>
+
+    <div class="rotate-warning-message">
+        <img src="src/rotate_warning.png" alt="Please rotate the device">
+        <p>Please rotate the device</p>
+    </div>
+
+
+</body>
+
+<script src="script.js"></script>
+</html>
